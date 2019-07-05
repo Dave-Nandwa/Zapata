@@ -1,0 +1,40 @@
+<ion-header mode='ios'>
+  <ion-toolbar color="{{settings.theme.header}}">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/account"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{"Wishlist" | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="wishlist">
+
+<div class="spinner" *ngIf="!wishlist && settings.customer?.id"><ion-spinner> </ion-spinner></div>
+
+<div *ngIf="!settings.customer?.id" class="empty">
+  <ion-icon name="heart-empty"></ion-icon>
+</div>
+
+<div *ngIf="settings.customer?.id">
+    <div *ngIf="wishlist">
+        <div *ngIf="!wishlist.length" text-center class="empty">
+            <ion-icon name="heart-empty"></ion-icon>
+        </div>
+        <div *ngIf="wishlist.length">
+            <ion-item *ngFor="let item of wishlist">
+                <ion-thumbnail slot="start" (click)="getProduct(item.id)">
+                    <img src="{{item.image_thumb}}">
+                </ion-thumbnail>
+                <ion-label class="name-label" (click)="getProduct(item.id)">
+                    <ion-text text-wrap>{{item.name}}</ion-text>
+                    <p class="price">
+                    <span class="price">{{1*item.price | currency:settings.currency:symbol:'1.2-2'}}</span>
+                    <span *ngIf="item.sale_price" class="special-price"><del>{{1*item.sale_price | currency:settings.currency:symbol:'1.2-2'}}</del></span>
+                    </p>
+                </ion-label>
+                <ion-button fill="clear" (click)="removeFromWishlist(item.id)" class="trash"><ion-icon name="close" style="font-size:22px;"></ion-icon></ion-button>
+
+            </ion-item>
+        </div>
+    </div>
+</div>
+</ion-content>

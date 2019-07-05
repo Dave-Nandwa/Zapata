@@ -1,0 +1,54 @@
+.wishlist {
+    ion-thumbnail {
+        height: auto;
+        width: 100px;
+    }
+    .empty {
+        margin-top: 50px;
+        text-align: center;
+        ion-icon {
+            font-size: 7.2em;
+        }
+
+        h4, h5{
+            font-size: 15px;
+            margin: 10px 20px;
+        }
+    }
+    .price {
+        font-weight: bold;
+        font-size: 14px;
+    }
+    .special-price {
+        padding-left: 5px;
+        font-size: 12px;
+        font-weight: 400;
+    }
+
+    ion-text{
+        font-size: 15px;
+    }
+}
+
+.name-label{
+    margin-right: 16px;
+
+    ion-button{
+        --box-shadow: none;
+        height: 26px;
+        width: 26px;
+        --padding-start: 0;
+        --padding-end: 0;
+
+        ion-icon{
+            font-size: 22px;
+        }
+    }
+}
+
+
+.trash{
+    position: absolute;
+    top: 16px;
+    right: 0;
+}

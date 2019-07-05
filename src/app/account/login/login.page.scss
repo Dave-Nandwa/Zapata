@@ -1,0 +1,16 @@
+.login {
+    position: relative;
+    .form {
+        margin: 0;
+        position: absolute;
+        width: 90%;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        .errors {
+            text-align: center;
+            margin-top: 30px;
+            //color: #ed143d;
+        }
+    }
+}

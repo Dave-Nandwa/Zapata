@@ -1,0 +1,32 @@
+<ion-header mode='ios'>
+  <ion-toolbar color="{{settings.theme.header}}">
+  	<ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/account"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{"Login" | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="login">
+<div class="form">  
+<ion-list>
+<form [formGroup]="form">
+  <ion-item>
+  <ion-input type="text" formControlName="username" placeholder="Username"></ion-input>
+  </ion-item>
+  <ion-item>
+  <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
+  </ion-item>
+ </form>  
+</ion-list>
+ <ion-button color="{{settings.theme.button}}" expand="block" fill="solid" [disabled]="!form.valid || disableSubmit"  (click)="onSubmit()">{{"Login"| translate}}</ion-button>
+ <ion-button color="{{settings.theme.button}}" expand="block" fill="clear" (click)="forgotton()">{{"Forgot Password"| translate}}?</ion-button>
+
+
+ <div class="errors" *ngIf="errors">
+  <div *ngFor="let error of errors | keys">
+    <span [innerHTML]="error.value"></span>
+  </div>
+ </div>
+</div>
+</ion-content>

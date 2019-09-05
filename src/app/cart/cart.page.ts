@@ -1,12 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { LoadingController, NavController } from '@ionic/angular';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ApiService } from '../api.service';
-import { Config } from '../config';
-import { Data } from '../data';
-import { Settings } from '../data/settings';
-import { HttpParams } from "@angular/common/http";
-import { Product } from '../data/product';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  LoadingController,
+  NavController
+} from '@ionic/angular';
+import {
+  ActivatedRoute,
+  Router
+} from '@angular/router';
+import {
+  ApiService
+} from '../api.service';
+import {
+  Config
+} from '../config';
+import {
+  Data
+} from '../data';
+import {
+  Settings
+} from '../data/settings';
+import {
+  HttpParams
+} from "@angular/common/http";
+import {
+  Product
+} from '../data/product';
 
 @Component({
   selector: 'app-cart',
@@ -17,8 +38,8 @@ export class CartPage {
   coupon: any;
   cart: any = {};
   couponMessage: any;
-  constructor(public config: Config, public api: ApiService, public data: Data, public router: Router, public settings: Settings, public loadingController: LoadingController, public navCtrl: NavController, public route: ActivatedRoute, public productData: Product) { }
-  ngOnInit() { }
+  constructor(public config: Config, public api: ApiService, public data: Data, public router: Router, public settings: Settings, public loadingController: LoadingController, public navCtrl: NavController, public route: ActivatedRoute, public productData: Product) {}
+  ngOnInit() {}
   ionViewDidEnter() {
     this.getCart();
     console.log(this.settings.reward)
@@ -42,6 +63,10 @@ export class CartPage {
     this.router.navigate(['/tabs/cart/address'], navigationExtras);
   }
 
+  checkoutGuest() {
+    this.navCtrl.navigateForward('/tabs/account/login');
+  }
+
   getProduct(id) {
     this.productData.product = {};
     this.navCtrl.navigateForward(this.router.url + '/product/' + id);
@@ -55,7 +80,7 @@ export class CartPage {
       console.log(err);
     });
   }
-  
+
   async submitCoupon(coupon) {
     await this.api.postItem('apply_coupon', {
       coupon_code: coupon
@@ -80,14 +105,12 @@ export class CartPage {
 
     if (this.data.cartItem[key].quantity != undefined && this.data.cartItem[key].quantity == 0) {
       this.data.cartItem[key].quantity = 0
-    }
-    else {
+    } else {
       this.data.cartItem[key].quantity += 1
     };
     if (this.data.cart[id] != undefined && this.data.cart[id] == 0) {
       this.data.cart[id] = 0
-    }
-    else {
+    } else {
       this.data.cart[id] += 1
     };
 
@@ -110,14 +133,12 @@ export class CartPage {
 
     if (this.data.cartItem[key].quantity != undefined && this.data.cartItem[key].quantity == 0) {
       this.data.cartItem[key].quantity = 0;
-    }
-    else {
+    } else {
       this.data.cartItem[key].quantity -= 1;
     };
     if (this.data.cart[id] != undefined && this.data.cart[id] == 0) {
       this.data.cart[id] = 0
-    }
-    else {
+    } else {
       this.data.cart[id] -= 1
     };
 

@@ -126,13 +126,14 @@ export class CheckoutPage implements OnInit {
     //var options = "location=no,hidden=yes,toolbar=no,hidespinner=yes";
     const options: InAppBrowserOptions = {
       zoom: 'no',
-      hidespinner: 'yes'
-    }
+      hidespinner: 'yes',
+      hidden: 'yes'
+    };
     let browser = this.iab.create(this.results.redirect, '_self', options);
-    browser.show();
+    //browser.show();
     browser.on('loadstart').subscribe(data => {
       if (data.url.indexOf('/order-received/') != -1 && data.url.indexOf('key=wc_order_') != -1) {
-        browser.hide();
+        //browser.hide();
         this.orderSummary(data.url);
       } else if (data.url.indexOf('cancel_order=true') != -1 || data.url.indexOf('cancelled=1') != -1 || data.url.indexOf('cancelled') != -1) {
         browser.close();

@@ -6,31 +6,23 @@
     <ion-title>{{"Checkout" | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content padding>
-
-
   <div class="spinner" *ngIf="!orderReview">
     <ion-spinner></ion-spinner>
   </div>
-
   <div *ngIf="orderReview">
     <ion-list>
       <ion-list-header>
         <ion-label>{{"Billing Address" | translate}}</ion-label>
       </ion-list-header>
-
       <ion-item>
         <ion-label text-wrap>
           <p>
             <span>{{checkoutData.form.billing_first_name}}</span>&nbsp;
             <span>{{checkoutData.form.billing_last_name}}</span>&nbsp;
-            <!-- <span>{{checkoutData.form.billing_company}}</span>&nbsp; -->
             <span>{{checkoutData.form.billing_address_1}}</span>&nbsp;
-            <!-- <span>{{checkoutData.form.billing_address_2}}</span>&nbsp; -->
             <span>{{checkoutData.form.billing_city}}</span>
             <span>{{checkoutData.form.billing_state}}</span>&nbsp;
-            <!--<span>{{checkoutData.form.billing_postcode}}</span>&nbsp;-->
             <span>{{checkoutData.form.billing_country}}</span>&nbsp;
             <span>{{checkoutData.form.billing_email}}</span>&nbsp;
             <span>{{checkoutData.form.billing_phone}}</span>
@@ -42,18 +34,14 @@
       <ion-list-header>
         <ion-label>{{"Shipping Address" | translate}}</ion-label>
       </ion-list-header>
-
       <ion-item>
         <ion-label text-wrap>
           <p>
             <span>{{checkoutData.form.shipping_first_name}}</span>&nbsp;
             <span>{{checkoutData.form.shipping_last_name}}</span>&nbsp;
-            <!-- <span>{{checkoutData.form.shipping_company}}</span>&nbsp; -->
             <span>{{checkoutData.form.shipping_address_1}}</span>&nbsp;
-            <!-- <span>{{checkoutData.form.shipping_address_2}}</span>&nbsp; -->
             <span>{{checkoutData.form.shipping_city}}</span>&nbsp;
             <span>{{checkoutData.form.shipping_state}}</span>&nbsp;
-            <!-- <span>{{checkoutData.form.shipping_postcode}}</span>&nbsp; -->
             <span>{{checkoutData.form.shipping_country}}</span>&nbsp;
             <span>{{checkoutData.form.shipping_email}}</span>&nbsp;
             <span>{{checkoutData.form.shipping_phone}}</span>
@@ -61,19 +49,19 @@
         </ion-label>
       </ion-item>
     </ion-list>
-
     <ion-list *ngIf="orderReview?.shipping">
-      <ion-radio-group *ngFor="let package of orderReview.shipping" [(ngModel)]="package.chosen_method" (ngModelChange)="updateOrderReview()">
+      <ion-radio-group *ngFor="let package of orderReview.shipping" [(ngModel)]="package.chosen_method"
+        (ngModelChange)="updateOrderReview()">
         <ion-list-header>
           <span [innerHTML]="package.package_name"></span>
         </ion-list-header>
         <ion-item *ngFor="let method of package.shipping | keys">
-          <ion-label><span [innerHTML]="method.value.label"></span> <b>-</b> <span>{{method.value.cost | currency:settings.currency:true:'1.2-2'}}</span></ion-label>
+          <ion-label><span [innerHTML]="method.value.label"></span> <b>-</b>
+            <span>{{method.value.cost | currency:settings.currency:true:'1.2-2'}}</span></ion-label>
           <ion-radio color="{{settings.theme.button}}" value="{{method.value.id}}"></ion-radio>
         </ion-item>
       </ion-radio-group>
     </ion-list>
-
     <ion-list *ngIf="orderReview?.payment">
       <ion-radio-group [(ngModel)]="checkoutData.form.payment_method" (ngModelChange)="onChangePayment()">
         <ion-list-header>
@@ -82,32 +70,29 @@
         <ion-item *ngFor="let method of orderReview.payment | keys">
           <ion-label text-wrap class="ion-text-nowrap"><span [innerHTML]="method.value.title"></span></ion-label>
           <ion-radio color="{{settings.theme.button}}" value="{{method.value.id}}"></ion-radio>
-
         </ion-item>
-        <ion-item class="payment-description" *ngIf="orderReview.payment[checkoutData.form.payment_method]?.description" lines="none">
+        <ion-item class="payment-description" *ngIf="orderReview.payment[checkoutData.form.payment_method]?.description"
+          lines="none">
           <ion-label text-wrap>
             <span [innerHTML]="orderReview.payment[checkoutData.form.payment_method]?.description"></span>
           </ion-label>
         </ion-item>
       </ion-radio-group>
     </ion-list>
-
-
-    <!-- ADDED -->
     <div *ngIf="checkoutData.form.payment_method == 'dear_eko_wmbp_eko'" class="side-heading-background">
       <pre>
-        HOW TO PAY
-          1. Dial *150*01#
-          2. Select 5 – Pay Merchant
-          3. Select 2 – Pay Masterpass QR Merchant
-          4. Enter 8-digit Merchant Number “<i>60269974</i>”
-          5. Enter this Amount: (<span style="color:#C3272B"><b>{{priceTotal}}</b></span>)
-          6. Enter PIN to confirm
-          7. You will receive confirmation SMS
-          8. Fill Up The Form Below
-      </pre>
-      <ion-label class="payment-instructions ion-color-white"><span style="color:#ffffff!important">{{checkoutData.form.payment_instructions}}</span></ion-label>
-      <!-- ADDED ON 28/1/2019 -->
+          HOW TO PAY
+            1. Dial *150*01#
+            2. Select 5 – Pay Merchant
+            3. Select 2 – Pay Masterpass QR Merchant
+            4. Enter 8-digit Merchant Number “<i>60342532</i>”
+            5. Enter this Amount: (<span style="color:#C3272B"><b>TZS {{priceTotal}}</b></span>)
+            6. Enter PIN to confirm
+            7. You will receive confirmation SMS
+            8. Fill Up The Form Below
+        </pre>
+      <ion-label class="payment-instructions ion-color-white"><span
+          style="color:#ffffff!important">{{checkoutData.form.payment_instructions}}</span></ion-label>
       <form #f="ngForm">
         <ion-card mode="md">
           <ion-list no-margin>
@@ -116,35 +101,35 @@
             </ion-item>
             <ion-item>
               <ion-label floating>{{"Mobile No." | translate}}</ion-label>
-              <ion-input required type="text" [(ngModel)]="checkoutData.form.wmbp_eko_number" name="wmbp_eko_number" id="wmbp_eko_number" placeholder="(eg. 0712XXXXXX)"> </ion-input>
+              <ion-input required type="text" [(ngModel)]="checkoutData.form.wmbp_eko_number" name="wmbp_eko_number"
+                id="wmbp_eko_number" placeholder="(eg. 0712XXXXXX)"> </ion-input>
             </ion-item>
             <ion-item>
               <ion-label floating>{{"Transaction ID." | translate}} </ion-label>
-              <ion-input required type="text" [(ngModel)]="checkoutData.form.wmbp_eko_transaction_id" name="wmbp_eko_transaction_id" id="wmbp_eko_transaction_id" placeholder="(eg. TDX23234E6) "> </ion-input>
+              <ion-input required type="text" [(ngModel)]="checkoutData.form.wmbp_eko_transaction_id"
+                name="wmbp_eko_transaction_id" id="wmbp_eko_transaction_id" placeholder="(eg. TDX23234E6) ">
+              </ion-input>
             </ion-item>
           </ion-list>
-          </ion-card>
+        </ion-card>
       </form>
     </div>
-    <!-- ADDED ABOVE -->
-
-
-    <!-- ADDED -->
     <div *ngIf="checkoutData.form.payment_method == 'dear_paym_wmbp_paym'" class="side-heading-background">
       <pre>
-        HOW TO PAY
-          1. Dial *150*60#
-          2. Select 5 – Make Payments
-          3. Select 1 – Merchant Payments
-          4. Select 1 – Pay with SelcomPay/Masterpass
-          6. Enter this Amount: (<span style="color:#C3272B"><b>{{priceTotal}}</b></span>)
-          6. Enter Merchant Number “60269974”
-          7. Enter PIN to confirm
-          8. You will receive confirmation SMS
-          9. Fill Up The Form Below
-      </pre>
-      <ion-label class="payment-instructions ion-color-white" style="color:#ffffff!important;background-color:#C3272B!important">{{checkoutData.form.payment_instructions}} </ion-label>
-      <!-- ADDED ON 28/1/2019 -->
+          HOW TO PAY
+            1. Dial *150*60#
+            2. Select 5 – Make Payments
+            3. Select 1 – Merchant Payments
+            4. Select 1 – Pay with SelcomPay/Masterpass
+            6. Enter this Amount: (<span style="color:#C3272B"><b>TZS {{priceTotal}}</b></span>)
+            6. Enter Merchant Number <i>“60342532”</i>
+            7. Enter PIN to confirm
+            8. You will receive confirmation SMS
+            9. Fill Up The Form Below
+        </pre>
+      <ion-label class="payment-instructions ion-color-white"
+        style="color:#ffffff!important;background-color:#C3272B!important">{{checkoutData.form.payment_instructions}}
+      </ion-label>
       <form #f="ngForm">
         <ion-card mode="md">
           <ion-list no-margin>
@@ -153,34 +138,35 @@
             </ion-item>
             <ion-item>
               <ion-label floating>{{"Mobile No." | translate}}</ion-label>
-              <ion-input required type="text" [(ngModel)]="checkoutData.form.wmbp_paym_number" name="wmbp_paym_number" id="wmbp_paym_number" placeholder="(eg. 0712XXXXXX)"> </ion-input>
+              <ion-input required type="text" [(ngModel)]="checkoutData.form.wmbp_paym_number" name="wmbp_paym_number"
+                id="wmbp_paym_number" placeholder="(eg. 0712XXXXXX)"> </ion-input>
             </ion-item>
             <ion-item>
               <ion-label floating>{{"Transaction ID." | translate}} </ion-label>
-              <ion-input required type="text"  [(ngModel)]="checkoutData.form.wmbp_paym_transaction_id" name="wmbp_paym_transaction_id" id="wmbp_paym_transaction_id" placeholder="(eg. TDX23234E6) "> </ion-input>
+              <ion-input required type="text" [(ngModel)]="checkoutData.form.wmbp_paym_transaction_id"
+                name="wmbp_paym_transaction_id" id="wmbp_paym_transaction_id" placeholder="(eg. TDX23234E6) ">
+              </ion-input>
             </ion-item>
           </ion-list>
-          </ion-card>
+        </ion-card>
       </form>
     </div>
-    <!-- ADDED ABOVE -->
-
-    <!-- ADDED -->
     <div *ngIf="checkoutData.form.payment_method == 'dear_pesa_wmbp_pesa'" class="side-heading-background">
       <pre>
-        HOW TO PAY
-          1. Dial *150*00#
-          2. Choose 4 – Lipa by M-Pesa
-          3. Choose 4 – Enter Business Number
-          4. Enter “123123” (As Selcom Pay/Masterpass Number)
-          5. Enter Reference Number “60269974”
-          6. Enter this Amount: (<span style="color:#C3272B"><b>{{priceTotal}}</b></span>)
-          7. Enter PIN to confirm
-          8. You will receive confirmation SMS
-          9. Fill Up The Form Below
-      </pre>
-      <ion-label class="payment-instructions ion-color-white" style="color:#ffffff!important;background-color:#C3272B!important">{{checkoutData.form.payment_instructions}} </ion-label>
-      <!-- ADDED ON 28/1/2019 -->
+          HOW TO PAY
+            1. Dial *150*00#
+            2. Choose 4 – Lipa by M-Pesa
+            3. Choose 4 – Enter Business Number
+            4. Enter “123123” (As Selcom Pay/Masterpass Number)
+            5. Enter Reference Number <i>“60342532”</i>
+            6. Enter this Amount: (<span style="color:#C3272B"><b>TZS {{priceTotal}}</b></span>)
+            7. Enter PIN to confirm
+            8. You will receive confirmation SMS
+            9. Fill Up The Form Below
+        </pre>
+      <ion-label class="payment-instructions ion-color-white"
+        style="color:#ffffff!important;background-color:#C3272B!important">{{checkoutData.form.payment_instructions}}
+      </ion-label>
       <form #f="ngForm">
         <ion-card mode="md">
           <ion-list no-margin>
@@ -189,19 +175,19 @@
             </ion-item>
             <ion-item>
               <ion-label floating>{{"Mobile No." | translate}}</ion-label>
-              <ion-input required type="text" [(ngModel)]="checkoutData.form.wmbp_pesa_number" name="wmbp_pesa_number" id="wmbp_pesa_number" placeholder="(eg. 0712XXXXXX)"> </ion-input>
+              <ion-input required type="text" [(ngModel)]="checkoutData.form.wmbp_pesa_number" name="wmbp_pesa_number"
+                id="wmbp_pesa_number" placeholder="(eg. 0712XXXXXX)"> </ion-input>
             </ion-item>
             <ion-item>
               <ion-label floating>{{"Transaction ID." | translate}} </ion-label>
-              <ion-input required type="text" [(ngModel)]="checkoutData.form.wmbp_pesa_transaction_id" name="wmbp_pesa_transaction_id" id="wmbp_pesa_transaction_id" placeholder="(eg. TDX23234E6) "> </ion-input>
+              <ion-input required type="text" [(ngModel)]="checkoutData.form.wmbp_pesa_transaction_id"
+                name="wmbp_pesa_transaction_id" id="wmbp_pesa_transaction_id" placeholder="(eg. TDX23234E6) ">
+              </ion-input>
             </ion-item>
           </ion-list>
-          </ion-card>
+        </ion-card>
       </form>
     </div>
-    <!-- ADDED ABOVE -->
-
-
     <div *ngIf="cardResponse.cardNumber && checkoutData.form.payment_method == 'stripe'">
       <ion-card mode="md">
         <ion-item *ngIf="cardResponse.cardNumber">
@@ -212,7 +198,6 @@
             <p>{{cardResponse.cardNumber}}</p>
           </ion-label>
         </ion-item>
-
         <ion-item>
           <ion-label text-wrap>
             <ion-text>
@@ -221,7 +206,6 @@
             <p>{{cardResponse.expiryMonth}}/{{cardResponse.expiryYear}}</p>
           </ion-label>
         </ion-item>
-
         <ion-item>
           <ion-label text-wrap>
             <ion-text>
@@ -232,12 +216,10 @@
         </ion-item>
       </ion-card>
     </div>
-
     <div *ngIf="errorMessage">
-      <h2 [innerHTML]="errorMessage" style="font-size: 14px;  color: red;"></h2>
+      <h2 [innerHTML]="errorMessage" style="font-size:14px;color:red"></h2>
     </div>
-
-    <ion-button [disabled]="disableButton" color="{{settings.theme.button}}" expand="block" fill="solid" (click)="placeOrder()">{{ disableButton? 'Please wait' : 'Place order'}}</ion-button>
+    <ion-button [disabled]="disableButton" color="{{settings.theme.button}}" expand="block" fill="solid"
+      (click)="placeOrder()">{{ disableButton? 'Please wait' : 'Place order'}}</ion-button>
   </div>
-
 </ion-content>

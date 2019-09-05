@@ -107,7 +107,7 @@ export class ApiService {
 		    catchError(this.handleError(endPoint))
 		);
 	}
-	
+
 	wcpost(endPoint, data, params = {}){
 		const url = this.config.setUrl('POST', '/wp-json/wc/v3/' + endPoint + '?', params);
 		return this.http.post(url, data).pipe(
@@ -115,7 +115,6 @@ export class ApiService {
 		    catchError(this.handleError(endPoint))
 		);
 	}
-
 	getReviews(endPoint, filter = {}){
 		const url = this.config.setUrl('GET', '/wp-json/wc/v2/' + endPoint + '?', filter);
 		return this.http.get(url).pipe(
@@ -123,7 +122,6 @@ export class ApiService {
 		    catchError(this.handleError(endPoint))
 		);
 	}
-
 	getExternalData(url, data = {}){
 		var params = new HttpParams();
 		for (var key in data) { if('object' !== typeof(data[key])) params = params.set(key, data[key]) }
@@ -132,7 +130,6 @@ export class ApiService {
 		    catchError(this.handleError(url))
 		);
 	}
-
 	getAddonsList(endPoint, filter = {}){
 		const url = this.config.setUrl('GET', '/wp-json/wc-product-add-ons/v1/' + endPoint + '?', filter);
 		return this.http.get(url).pipe(

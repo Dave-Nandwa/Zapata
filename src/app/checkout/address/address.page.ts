@@ -5,7 +5,7 @@ import { ApiService } from '../../api.service';
 import { CheckoutData } from '../../data/checkout';
 import { Settings } from './../../data/settings';
 
-@Component({
+@Component({ 
   selector: 'app-address',
   templateUrl: './address.page.html',
   styleUrls: ['./address.page.scss'],
@@ -14,16 +14,34 @@ export class CheckoutAddressPage implements OnInit {
   errorMessage: any;
   loader: boolean = false;
   countries: any;
-
-  constructor(public api: ApiService, public checkoutData: CheckoutData, public router: Router, public navCtrl: NavController, public settings: Settings, public route: ActivatedRoute) { }
+  areas: any;
+  areasObj:any;
+  chosenArea:any;
+  constructor(public api: ApiService, public checkoutData: CheckoutData, public router: Router, public navCtrl: NavController, public settings: Settings, public route: ActivatedRoute) { 
+    this.chosenArea ="Bamaga";
+  }
   ngOnInit() {
+    this.areasObj = [ { id: 1, name: 'Bamaga' }, { id: 2, name: 'City Center/Posta' }, { id: 3, name: ' Ilala (Boma' }, { id: 4, name: 'Buguruni' }, { id: 5, name: 'Lamada' }, { id: 6, name: 'Msimbazi)' }, { id: 7, name: ' Kariakoo' }, { id: 8, name: ' Kawe' }, { id: 9, name: ' Kigogo' }, { id: 10, name: ' Kinondoni' }, { id: 11, name: ' Kisuto' }, { id: 12, name: ' Kurasini Bandarini' }, { id: 13, name: ' Magomeni' }, { id: 14, name: ' Makongo' }, { id: 15, name: ' Makumbusho' }, { id: 16, name: ' Manzese' }, { id: 17, name: ' Masaki' }, { id: 18, name: ' Mawasiliano' }, { id: 19, name: ' Mbezi Beach' }, { id: 20, name: ' Mbezi Beach B' }, { id: 21, name: ' Mbezi Chini' }, { id: 22, name: ' Mbezi Juu' }, { id: 23, name: ' Mikocheni A' }, { id: 24, name: ' Mikocheni B' }, { id: 25, name: ' Mlalakuwa/Avocado' }, { id: 26, name: ' Mlimani' }, { id: 27, name: ' Morocco' }, { id: 28, name: ' Mwananyamala' }, { id: 29, name: ' Mwenge' }, { id: 30, name: ' Namanga' }, { id: 31, name: ' Oysterbay' }, { id: 32, name: ' Sala Sala' }, { id: 33, name: ' Shekilango' }, { id: 34, name: ' Sinza' }, { id: 35, name: ' Suncrest Cineplex - Quality Center' }, { id: 36, name: ' Tandale' }, { id: 37, name: ' Ubungo' }, { id: 38, name: ' Ubungo External' }, { id: 39, name: ' Ubungo Industrial' }, { id: 40, name: ' UD Area' }, { id: 41, name: ' Upanga' }, { id: 42, name: ' Victoria' } ]
+    this.areas = ['Bamaga', 'City Center/Posta', ' Ilala (Boma', 'Buguruni', 'Lamada', 'Msimbazi)', ' Kariakoo', ' Kawe', ' Kigogo', ' Kinondoni', ' Kisuto', ' Kurasini Bandarini', ' Magomeni', ' Makongo', ' Makumbusho', ' Manzese', ' Masaki', ' Mawasiliano', ' Mbezi Beach', ' Mbezi Beach B', ' Mbezi Chini', ' Mbezi Juu', ' Mikocheni A', ' Mikocheni B', ' Mlalakuwa/Avocado', ' Mlimani', ' Morocco', ' Mwananyamala', ' Mwenge', ' Namanga', ' Oysterbay', ' Sala Sala', ' Shekilango', ' Sinza', ' Suncrest Cineplex - Quality Center', ' Tandale', ' Ubungo', ' Ubungo External', ' Ubungo Industrial', ' UD Area', ' Upanga', ' Victoria'];
     this.getCheckoutForm();
     this.getCountries();
     console.log("Hello.");
     this.route.queryParams.subscribe((res) => {
       console.log(res.total);
     });
+
   }
+
+  areaCompare(a: {id: number, name:string}, b:{id: number, name:string} ) {
+    if (a.id === b.id) {
+      let name = a.name;
+      return name
+    }
+    return false
+  }
+
+
+
   async getCheckoutForm() {
     this.loader = true;
     await this.api.postItem('get_checkout_form').subscribe(res => {
@@ -58,6 +76,13 @@ export class CheckoutAddressPage implements OnInit {
     else this.checkoutData.shippingStates = undefined;
     //this.updateOrderReview();
   }
+
+  areaSelected() {
+    setTimeout(()=>{
+      console.log(this.checkoutData.form.billing_city.name); 
+    }, 100);
+  }
+
   async updateOrderReview() {
     await this.api.postItem('update_order_review').subscribe(res => {
       this.checkoutData.orderReview = res;
@@ -67,7 +92,7 @@ export class CheckoutAddressPage implements OnInit {
   }
 
   continueCheckout() {
-
+    this.checkoutData.form.billing_city = this.checkoutData.form.billing_city.name;
     this.errorMessage = '';
 
     if (this.validateForm()) {
@@ -99,13 +124,13 @@ export class CheckoutAddressPage implements OnInit {
       return false;
     }
 
-    if (this.checkoutData.form.billing_address_2 == '' || this.checkoutData.form.billing_address_2 == undefined) {
-      this.errorMessage = 'Landmark is a required field';
-      return false;
-    }
+    // if (this.checkoutData.form.billing_address_2 == '' || this.checkoutData.form.billing_address_2 == undefined) {
+    //   this.errorMessage = 'Landmark is a required field';
+    //   return false;
+    // }
 
     if (this.checkoutData.form.billing_city == '' || this.checkoutData.form.billing_city == undefined) {
-      this.errorMessage = 'Billing city is a required field';
+      this.errorMessage = 'Billing Area is a required field';
       return false;
     }
 
@@ -176,7 +201,7 @@ export class CheckoutAddressPage implements OnInit {
     // this.checkoutData.form.shipping_company = this.checkoutData.form.billing_company;
     this.checkoutData.form.shipping_address_1 = this.checkoutData.form.billing_address_1;
     this.checkoutData.form.shipping_address_2 = this.checkoutData.form.billing_address_2;
-    this.checkoutData.form.shipping_city = this.checkoutData.form.billing_city;
+    this.checkoutData.form.shipping_city = this.checkoutData.form.billing_city.name
     // this.checkoutData.form.shipping_postcode = this.checkoutData.form.billing_postcode;
     this.checkoutData.form.shipping_country = this.checkoutData.form.billing_country;
     this.checkoutData.form.shipping_state = this.checkoutData.form.billing_state;

@@ -24,6 +24,9 @@ export class LoginPage implements OnInit {
           });
     }
     ngOnInit() {}
+    goTo(path) {
+        this.navCtrl.navigateForward(path);
+    }
     async onSubmit() {
         this.disableSubmit = true;
         await this.api.postItem('login', this.form.value).subscribe(res => {

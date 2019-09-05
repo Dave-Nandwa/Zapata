@@ -16,6 +16,7 @@
 </div>
 
 <div *ngIf="cart.cart_contents">
+  
 <div *ngIf="cart.cart_contents?.length != 0">
   <ion-item *ngFor="let item of cart.cart_contents | keys">
     <ion-thumbnail slot="start" (click)="getProduct(item.value.product_id)">
@@ -96,11 +97,11 @@
       {{"Discount" | translate}} <a (click)="removeCoupon()"> (Remove)</a><span style="float: right">{{1*cart.cart_totals.discount_total | currency:settings.currency:symbol:'1.2-2'}}</span>
     </ion-label>
   </ion-item>
-  <!-- <ion-item>
+  <ion-item>
     <ion-label>
       {{"Delivery Charge" | translate}} <span style="float: right">{{1*cart.cart_totals.shipping_total | currency:settings.currency:symbol:'1.2-2'}}</span>
     </ion-label>
-  </ion-item> -->
+  </ion-item>
   <ion-item>
     <ion-label class="grand-total">
       {{"Grand Total" | translate}} <span style="float: right">{{1*cart.cart_totals.total | currency:settings.currency:symbol:'1.2-2'}}</span>
@@ -109,7 +110,8 @@
 
 </ion-list>
 
-<ion-button color="{{settings.theme.button}}" expand="block" fill="solid" (click)="checkout()" style="margin: 16px;">{{"Continue" | translate}}</ion-button>
+<ion-button *ngIf="settings.customer?.id" color="{{settings.theme.button}}" expand="block" fill="solid" (click)="checkout()" style="margin: 16px;">{{"Continue" | translate}}</ion-button>
+<ion-button *ngIf="!settings.customer?.id"  color="{{settings.theme.button}}" expand="block" fill="solid" (click)="checkoutGuest()" style="margin: 16px;">{{"Continue" | translate}}</ion-button>
 </div>
 </div>
 </ion-content>

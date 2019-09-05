@@ -19,8 +19,10 @@
   </ion-item>
  </form>  
 </ion-list>
- <ion-button color="{{settings.theme.button}}" expand="block" fill="solid" [disabled]="!form.valid || disableSubmit"  (click)="onSubmit()">{{"Login"| translate}}</ion-button>
- <ion-button color="{{settings.theme.button}}" expand="block" fill="clear" (click)="forgotton()">{{"Forgot Password"| translate}}?</ion-button>
+<ion-button color="{{settings.theme.button}}" expand="block" fill="solid" [disabled]="!form.valid || disableSubmit"  (click)="onSubmit()">{{"Login"| translate}}</ion-button>
+<ion-button color="{{settings.theme.button}}" expand="block" fill="solid" (click)="goTo('tabs/account/register')">{{"Create an Account"| translate}}</ion-button>
+<ion-button color="{{settings.theme.button}}" expand="block" fill="clear" (click)="forgotton()">{{"Forgot Password"| translate}}?</ion-button>
+
 
 
  <div class="errors" *ngIf="errors">

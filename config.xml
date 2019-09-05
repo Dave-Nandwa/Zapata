@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.jacolmedia.zapatapp" version="0.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.jacolmedia.zapata" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Zapata Drinks</name>
     <description>Drinks.</description>
     <author email="dnandwa5@gmail.com" href="http://jacolmedia.com/">Jacol Media</author>
@@ -95,5 +95,4 @@
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <plugin name="onesignal-cordova-plugin" spec="^2.4.6" />
     <plugin name="card.io.cordova.mobilesdk" spec="^2.1.0" />
-    <plugin name="cordova-plugin-ionic-webview" spec="^2.3.2" />
 </widget>

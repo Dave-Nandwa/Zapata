@@ -1,8 +1,8 @@
 {
-  "name": "app",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "name": "Zapata Drinks",
+  "version": "1.0.0",
+  "author": "Zapata Group Limited",
+  "homepage": "https://zapata.co.tz/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -39,6 +39,7 @@
     "@ngx-translate/http-loader": "^4.0.0",
     "card.io.cordova.mobilesdk": "^2.1.0",
     "cordova-android": "8.0.0",
+    "cordova-ios": "5.0.1",
     "cordova-plugin-appminimize": "^1.0.1",
     "cordova-plugin-apprate": "^1.4.0",
     "cordova-plugin-crop": "^0.4.0",
@@ -50,7 +51,7 @@
     "cordova-plugin-globalization": "^1.11.0",
     "cordova-plugin-inappbrowser": "^3.0.0",
     "cordova-plugin-ionic-keyboard": "^2.1.3",
-    "cordova-plugin-ionic-webview": "^2.3.2",
+    "cordova-plugin-ionic-webview": "4.1.1",
     "cordova-plugin-nativestorage": "^2.3.2",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
@@ -109,10 +110,13 @@
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-plugin-ionic-webview": {}
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      }
     },
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   }
 }

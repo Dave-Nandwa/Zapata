@@ -1,5 +1,5 @@
 {
-  "name": "Zapata Drinks",
+  "name": "Zapata-Group",
   "version": "1.0.0",
   "author": "Zapata Group Limited",
   "homepage": "https://zapata.co.tz/",
@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/build-angular": "^0.12.4",
     "@angular/common": "^7.2.2",
     "@angular/core": "^7.2.2",
     "@angular/forms": "^7.2.2",
@@ -38,7 +39,7 @@
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^4.0.0",
     "card.io.cordova.mobilesdk": "^2.1.0",
-    "cordova-android": "8.0.0",
+    "cordova-android": "^8.1.0",
     "cordova-ios": "5.0.1",
     "cordova-plugin-appminimize": "^1.0.1",
     "cordova-plugin-apprate": "^1.4.0",
@@ -66,7 +67,6 @@
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.12.3",
-    "@angular-devkit/build-angular": "~0.12.3",
     "@angular-devkit/core": "~7.2.3",
     "@angular-devkit/schematics": "~7.2.3",
     "@angular/cli": "~7.2.3",
@@ -81,11 +81,12 @@
     "codelyzer": "~4.5.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~3.1.4",
+    "karma": "^4.4.1",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "node-sass": "^4.13.1",
     "protractor": "~5.4.0",
     "ts-node": "~8.0.0",
     "tslint": "~5.12.0",
@@ -115,8 +116,8 @@
       }
     },
     "platforms": [
-      "android",
-      "ios"
+      "ios",
+      "android"
     ]
   }
 }

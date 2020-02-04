@@ -278,26 +278,8 @@
   <div class="spinner" *ngIf="!data.freaturedProducts?.length">
     <ion-spinner> </ion-spinner>
   </div>
-  <div *ngFor="let children of data.blocks?.blocks" hideWhen="loading" class="blocks">
-    <div *ngIf="children.children?.length && children.style == 'scroll'"
-      [ngClass]="{'floating-header': children.header_align == 'left_floating'}"
-      class="floating-header banner-scroll {{children.banner_shadow}}">
-      <img class="banner ion-activatable ion-focusable hydrated {{children.banner_shadow}}"
-        *ngFor="let image of children.children ; let i = index" src="{{image.image}}" (click)="goto(image)"
-        [style.border-radius]="children.border_radius" [style.width.%]="children.child_width*this.settings.widthMultipy"
-        [style.margin-right]="children.margin_between" [style.margin-left]=" i == 0 ? children.margin_between : 0">
-    </div>
-    <div *ngIf="children.children?.length && children.style == 'grid'" class="banner-grid">
-      <ion-row class="row unlimited-items">
-        <ion-col *ngFor="let image of children.children" size="{{children.child_width/8.33333333}}"
-          [style.padding]="children.margin_between">
-          <img src="{{image.image}}" (click)="goto(image)" [style.border-radius]="children.border_radius"
-            class="{{children.card_style}} {{children.banner_shadow}} ion-activatable ion-focusable hydrated">
-        </ion-col>
-      </ion-row>
-    </div>
-  </div>
-  <div *ngIf="data.onsaleProducts?.length" class="related-products">
+
+  <!-- <div *ngIf="data.onsaleProducts?.length" class="related-products">
     <ion-list-header>
       <ion-label>{{"Crazy Monthly Discounts!" | translate}}</ion-label>
     </ion-list-header>
@@ -337,12 +319,51 @@
         </ion-card>
       </div>
     </div>
-  </div>
+  </div> -->
   <div class="spinner" *ngIf="!data.onsaleProducts?.length">
     <ion-spinner> </ion-spinner>
   </div>
+
+  <!-- ----------------------------- Categories ------------------------------ -->
   <ion-list-header *ngIf="data.products?.length">
-    <ion-label>{{"Other Drinks" | translate}}</ion-label>
+    <ion-label class="prov-title">{{"Our Stores" | translate}}</ion-label>
+  </ion-list-header>
+  <ion-row class="ion-padding categories">
+    <ion-col size='12' *ngFor="let category of data.mainCategories" (click)="getProducts(category.id)">
+      <ion-card class="category-card" class="ion-activatable ion-focusable hydrated" mode="md">
+        <ion-img alt="" src="{{category.image?.src}}"></ion-img>
+        <ion-card-header>
+          <ion-card-subtitle class="category-title" [innerHTML]="category.name"></ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <!-- ---------------------------------- - ---------------------------------- -->
+
+  <div *ngFor="let children of data.blocks?.blocks" hideWhen="loading" class="blocks">
+    <div *ngIf="children.children?.length && children.style == 'scroll'"
+      [ngClass]="{'floating-header': children.header_align == 'left_floating'}"
+      class="floating-header banner-scroll {{children.banner_shadow}}">
+      <img class="banner ion-activatable ion-focusable hydrated {{children.banner_shadow}}"
+        *ngFor="let image of children.children ; let i = index" src="{{image.image}}" (click)="goto(image)"
+        [style.border-radius]="children.border_radius" [style.width.%]="children.child_width*this.settings.widthMultipy"
+        [style.margin-right]="children.margin_between" [style.margin-left]=" i == 0 ? children.margin_between : 0">
+    </div>
+    <div *ngIf="children.children?.length && children.style == 'grid'" class="banner-grid">
+      <ion-row class="row unlimited-items">
+        <ion-col *ngFor="let image of children.children" size="{{children.child_width/8.33333333}}"
+          [style.padding]="children.margin_between">
+          <img src="{{image.image}}" (click)="goto(image)" [style.border-radius]="children.border_radius"
+            class="{{children.card_style}} {{children.banner_shadow}} ion-activatable ion-focusable hydrated">
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+
+  <!-- ---------------------------------- - ---------------------------------- -->
+
+<!--   <ion-list-header *ngIf="data.products?.length">
+    <ion-label>{{"More Products" | translate}}</ion-label>
   </ion-list-header>
   <ion-row *ngIf="data.products?.length">
     <ion-col size="{{settings.colWidthLatest}}" *ngFor="let item of data.products"
@@ -380,11 +401,12 @@
   </ion-row>
   <div class="spinner" *ngIf="!data.products?.length">
     <ion-spinner> </ion-spinner>
-  </div>
-  <ion-infinite-scroll threshold="100px"
+  </div> -->
+
+<!--   <ion-infinite-scroll threshold="100px"
     *ngIf="hasMoreItems && data.blocks?.settings?.show_latest && data.products?.length != 0"
     (ionInfinite)="loadData($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
     </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+  </ion-infinite-scroll> -->
 </ion-content>

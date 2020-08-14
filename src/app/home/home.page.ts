@@ -133,7 +133,7 @@ export class HomePage {
                 });
             }
             if (this.data.blocks.user) {
-                this.api.postItem('get_wishlist').subscribe(res => {
+                this.api.postItem('get_wishlist').subscribe((res: any) => {
                     for (let item in res) {
                         this.settings.wishlist[res[item].id] = res[item].id;
                     }
@@ -169,15 +169,23 @@ export class HomePage {
             console.log(err);
         });
     }
+    
     goto(item) {
         if (item.description == 'category') this.navCtrl.navigateForward('/tabs/home/products/' + item.url);
         else if (item.description == 'product') this.navCtrl.navigateForward('/tabs/home/product/' + item.url);
         else if (item.description == 'post') this.navCtrl.navigateForward('/tabs/home/post/' + item.url);
     }
+
     getProduct(item) {
         this.product.product = item;
         this.navCtrl.navigateForward('/tabs/home/product/' + item.id);
     }
+
+    getProducts(id) {
+        console.log(this.router.url);
+        this.navCtrl.navigateForward('/tabs/categories/products/' + id);
+    }
+
     getSubCategories(id) {
         const results = this.data.categories.filter(item => item.parent === parseInt(id));
         return results;

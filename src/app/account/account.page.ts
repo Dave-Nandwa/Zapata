@@ -17,10 +17,14 @@ export class AccountPage {
     constructor(private config: Config, public api: ApiService, public navCtrl: NavController, public settings: Settings, public platform: Platform, private appRate: AppRate, private emailComposer: EmailComposer, private socialSharing: SocialSharing) {}
     ngOnInit() {
     }
+
+    
     goTo(path) {
         this.navCtrl.navigateForward(path);
 
     }
+
+
     async log_out() {
         this.settings.customer.id = undefined;
         this.settings.vendor = false;
@@ -29,6 +33,8 @@ export class AccountPage {
             console.log(err);
         });
     }
+
+
     rateApp() {
         if (this.platform.is('cordova')) {
             this.appRate.preferences.storeAppURL = {
@@ -39,6 +45,7 @@ export class AccountPage {
             this.appRate.promptForRating(true);
         }
     }
+
     shareApp() {
         if (this.platform.is('cordova')) {
             var url = '';
